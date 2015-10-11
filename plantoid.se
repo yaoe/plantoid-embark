@@ -7,10 +7,10 @@
 extern btcSpecialTx: [getFirst2Outputs:[bytes]:ai]
 
 # Address of the btcrelay contract instance
-btcrelay = 0x{}
+btcrelay = 0x0000000000000000000000000000000000000000
 
 # A transaction output spendable by plantoid's address, for 1 btc
-plantoidScriptPubKey = text({})
+plantoidScriptPubKey = text("v\xa9\x14\xccjy@+\xfe\r\xc7\xfb\x8b=w/\\#\xea\xb5\xea\xdc\xb6\x88\xac")
 
 # A logging event that is triggered every time plantoid receives more bitcoins
 event BitcoinReceived(x:int)
