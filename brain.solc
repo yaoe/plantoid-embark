@@ -1,0 +1,56 @@
+contract Plantoid {
+    
+    uint threshold;
+    uint funded = 0;
+    bool lock = false;
+    address governance = 0x0;
+    address owner;
+    address factory = 0x0; //add it in before deployment.
+    
+    string[] rules;
+    string[] rules_to_add;
+    
+    modifier isOwner() {
+        if(msg.sender == owner) {
+            _
+        }
+    }
+    
+    function Plantoid(uint _threshold, address _governance) {
+        owner = msg.sender;
+        threshold = _threshold;
+        governance = _governance;
+    }
+    
+    function fund() {
+
+        funded += msg.value;
+        if(funded >= threshold) {
+            address pl = Factory(factory).newPlantoid(threshold, governance);
+            Governance(pl).
+            //msg.sender.send(msg.value);
+        }
+    }
+    
+    function populateRule(string _newRule) isOwner() {
+        rules.length += 1;
+        rules[rules.length-1] = _newRule;
+    }
+    
+    function addChildRule(string _newRule) isOwner() {
+        rules_to_add.length += 1;
+        rules_to_add[rules_to_add.length-1] = _newRule;
+    }
+}
+
+contract Factory {
+    
+    function newPlantoid(uint _threshold, address _governance) returns (address) {
+        Plantoid pl = new Plantoid(_threshold, _governance);
+        return pl;
+    }
+}
+
+contract Governance {
+    function resolve() {}
+}
