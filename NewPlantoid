@@ -1,0 +1,94 @@
+pragma solidity ^0.4.6;
+
+
+
+
+contract Plantoid {
+    
+    struct Proposal { address proposer; bytes32 url; uint256 votes; }
+    mapping (address => bool) voters;
+    mapping (address => uint256) funders;
+    mapping(address => string) proposals;
+    mapping(address => uint256) votes;
+    address[] allProposals;
+    address winner;
+    
+    uint256 totalweight;
+    uint256 targetBalance;
+    enum PossibleStatus { Fundraising, OpenCall, ClosedCall }
+    PossibleStatus status;
+    
+    modifier forStatus (PossibleStatus _status) {
+        if (status != _status) { throw; }
+        _;
+    }
+    
+    modifier notForStatus (PossibleStatus _status) {
+        if (status == _status) { throw; }
+        _;
+    }
+    
+
+    
+        function getBalance() returns(uint256)   {
+            address _contract = this;
+            return _contract.balance;
+        }
+
+        function fund() forStatus(PossibleStatus.Fundraising) payable returns(address) {
+            funders[msg.sender] += msg.value;
+            
+            if(this.balance >= targetBalance) {
+                status = PossibleStatus.OpenCall;
+            }
+            
+            return msg.sender;
+        }
+        
+        
+        function addProposal(string url) forStatus(PossibleStatus.OpenCall)  {
+            if(bytes(proposals[msg.sender]).length == 0) { 
+                    allProposals.length++ ;
+                    allProposals[allProposals.length-1] = msg.sender;
+            }
+            
+            proposals[msg.sender] = url;
+    
+         
+        }
+        
+        function getProposal(address id)  returns(string _url, uint256 _votes) {
+            _url = proposals[id];
+            _votes = votes[id];
+        }
+        
+        function nProposals() returns (uint256 n) {
+            return allProposals.length;
+        }
+        
+        function voteProposal(address id) forStatus(PossibleStatus.OpenCall) {   
+            if(voters[msg.sender]) {throw;}
+            votes[id] += funders[msg.sender];
+            voters[msg.sender] = true;
+            
+            totalweight += funders[msg.sender];
+            
+            if(totalweight > this.balance/2) {  //ADD MORE MATHS
+                status = PossibleStatus.ClosedCall;
+                winner = id;
+            }
+            
+        }
+        
+        function getWinner() returns(string _url, uint256 _votes) {
+            return getProposal(winner);
+        }
+            
+
+        function Plantoid() {
+            targetBalance = 100;
+            status = PossibleStatus.Fundraising;
+            
+        }
+}
+
