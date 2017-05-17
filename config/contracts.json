@@ -1,12 +1,10 @@
 {
   "default": {
-    "gas": "auto",
-    "contracts": {
-      "SimpleStorage": {
-        "args": [
-          100
-        ]
-      }
-    }
+    "gas": "2000000",
+	"contracts": {
+		"Plantoid": {
+			
+		}
+	}
   }
 }

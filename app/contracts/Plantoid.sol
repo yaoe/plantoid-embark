@@ -33,7 +33,6 @@ contract Plantoid {
 	event Funded (address indexed _funder, uint _amount);
 	event BtcFunded (string indexed _funder, uint _amount);
 	
-	
 	function getAddress() constant returns(address) {
 		address _contract = this;
 		return _contract;

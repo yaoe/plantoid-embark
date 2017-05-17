@@ -1,51 +1,120 @@
-<html>
-  <head>
-    <title>Embark - SimpleStorage Demo</title>
-    <link rel="stylesheet" href="css/app.css">
-    <script src="js/app.js"></script>
-  </head>
-  <body class="container">
+<!DOCTYPE HTML>
 
-First select your account:
-  <select id="accounts">
-  </select><br/><br/>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
 
-  	<p> Current balance = <span id="auto-balance">???</span> BTC</p>
+<head>
+	<title>Plantoids: Blockchain-based life forms</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="css/app.css" />
+	
+	<script src="js/app.js"></script>
+</head>
 
-	<button id=getBalance>get balance</button>
-	<input type=text id=balance disabled />
-
-	<br/>
-
-	<button id=sendFunds>send funds</button>
-	<input type=text id=amount />
-
-	<br/>
-
-	<button id=getStatus>get status</button>
-	<input type=text id=status disabled />
-
-	<br/>
-
-	<button id=sendProposal>send Proposal</button>
-	<input type=text id=proposalURL />
-
-	<br/>
-
-	<button id=listProposals>list Proposals</button><br/>
-	<textarea rows=10 cols=100 id=proposals disable></textarea>
-
-	<br/>
-
-	<button id=voteProposal>vote Proposal</button>
-	<input type=text id=proposalID />
-
-	<br/>
-
-	<button id=getWinner>get Winner</button>
-	<input type=text id=winnerID disable />
-
-	<br/>
-
-  </body>
+<body>
+	
+	<img id="background" src="http://okhaos.com/plantoids/images/header.png">
+	<div id="container">
+		<div id="content-padding" class="text-centered">
+			
+			<h1>I'm a Plantoid</h1>
+			<h4>A Blockchain-based life form.</h4>
+			<div id="btc" class="underlined">
+				<div>
+					<h3>Feed me</h3>
+					<img id="qr" src="http://okhaos.com/plantoids/images/QR-big.png">
+					<p>16tWKiHkx3D4ncjATYiqjazTSTWRQsYis6</p>
+				</div>
+				<div>
+					<p>Current balance :</p>
+					<div class="underlined">
+						<span id="btcBalance"
+						class="btcAmount">???</span>
+						<span class="small">BTC</span>
+					</div>
+					<span class="btcAmount">2.5</span>
+					<span class="small">BTC</span>
+					<p class="small">(required amount)</p>
+				</div>
+			</div>
+			
+			<div>
+				First select your account:
+				<select id="accounts">
+				</select><br/><br/>
+				
+				<p> Current balance = <span id="auto-balance">???</span> BTC</p>
+				
+				<button id=getBalance>get balance</button>
+				<input type=text id=balance disabled />
+				
+				<br/>
+				
+				<button id=sendFunds>send funds</button>
+				<input type=text id=amount />
+				
+				<br/>
+				
+				<button id=getStatus>get status</button>
+				<input type=text id=status disabled />
+				
+				<br/>
+				
+				<button id=sendProposal>send Proposal</button>
+				<input type=text id=proposalURL />
+				
+				<br/>
+				
+				<button id=listProposals>list Proposals</button><br/>
+				<textarea rows=10 cols=100 id=proposals disable></textarea>
+				
+				<br/>
+				
+				<button id=voteProposal>vote Proposal</button>
+				<input type=text id=proposalID />
+				
+				<br/>
+				
+				<button id=getWinner>get Winner</button>
+				<input type=text id=winnerID disable />
+				
+				<br/>
+			</div>
+			
+		</div>
+	</div>
+	
+	
+	
+	
+	<script>
+	
+	function getBalance(element)
+	{
+		httpGetAsync("https://blockchain.info/q/addressbalance/16tWKiHkx3D4ncjATYiqjazTSTWRQsYis6", function (res) {
+			element.innerHTML = Number(res) / 100000000;
+			console.log(Number(res) / 100000000);
+		});
+	}
+	
+	function httpGetAsync(theUrl, callback)
+	{
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function() {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+		}
+		xmlHttp.open("GET", theUrl, true); // true for asynchronous
+		xmlHttp.send(null);
+	}
+	
+	var amount = document.getElementById("btcBalance");
+	getBalance(amount);
+	
+	setInterval(function () {
+		console.log("refreshing balance...");
+		getBalance(amount);
+	}, 10000);
+	</script>
+</body>
 </html>

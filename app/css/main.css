@@ -1,5 +1,56 @@
-
-div {
-  margin: 15px;
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	color: white;
+	font-family: "roboto";
 }
 
+.text-centered {
+	text-align: center;
+}
+
+.underlined {
+	border-bottom: 1px solid white;
+}
+
+#qr {
+	width: 100px;
+	border: 1px solid white;
+	padding: 2px;
+}
+
+.btcAmount {
+	font-size: 1.5em;
+}
+
+.small {
+	font-size: 0.8em;
+}
+
+#btc {
+	display: flex;
+	justify-content: space-between;
+}
+
+#content-padding {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#container {
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+#background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
