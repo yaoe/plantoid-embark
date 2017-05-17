@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Embark - SimpleStorage Demo</title>
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
+  </head>
+  <body class="container">
+
+First select your account:
+  <select id="accounts">
+  </select><br/><br/>
+
+  	<p> Current balance = <span id="auto-balance">???</span> BTC</p>
+
+	<button id=getBalance>get balance</button>
+	<input type=text id=balance disabled />
+
+	<br/>
+
+	<button id=sendFunds>send funds</button>
+	<input type=text id=amount />
+
+	<br/>
+
+	<button id=getStatus>get status</button>
+	<input type=text id=status disabled />
+
+	<br/>
+
+	<button id=sendProposal>send Proposal</button>
+	<input type=text id=proposalURL />
+
+	<br/>
+
+	<button id=listProposals>list Proposals</button><br/>
+	<textarea rows=10 cols=100 id=proposals disable></textarea>
+
+	<br/>
+
+	<button id=voteProposal>vote Proposal</button>
+	<input type=text id=proposalID />
+
+	<br/>
+
+	<button id=getWinner>get Winner</button>
+	<input type=text id=winnerID disable />
+
+	<br/>
+
+  </body>
+</html>
