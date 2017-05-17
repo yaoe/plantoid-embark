@@ -12,7 +12,7 @@ contract Plantoid {
 	address public winner;
 	
 	// btc version test
-	mapping (bytes35 => uint256) btcFunders;
+	mapping (string => uint256) btcFunders;
 	uint256 btcBalance;
 	
 	uint256 totalweight;
@@ -31,6 +31,7 @@ contract Plantoid {
 	}
 	
 	event Funded (address indexed _funder, uint _amount);
+	event BtcFunded (string indexed _funder, uint _amount);
 	
 	
 	function getAddress() constant returns(address) {
@@ -51,9 +52,9 @@ contract Plantoid {
 		return winner;
 	}
 	
-	function btcFund(bytes35 _from, uint256 _amount) forStatus(PossibleStatus.Fundraising) payable returns(bytes35) {
+	function btcFund(string _from, uint256 _amount) forStatus(PossibleStatus.Fundraising) payable returns(string) {
 		
-		Funded(_from, _amount);
+		BtcFunded(_from, _amount);
 		
 		btcFunders[_from] += _amount;
 		
