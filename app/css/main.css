@@ -1,9 +1,9 @@
 body {
 	height: 100vh;
 	width: 100vw;
-	overflow: hidden;
 	color: white;
 	font-family: "roboto";
+	background-color: black;
 }
 
 .text-centered {

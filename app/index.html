@@ -79,6 +79,10 @@
 				<input type=text id=winnerID disable />
 				
 				<br/>
+
+				<hr/>
+	
+				<div id="btclog"></div>
 			</div>
 			
 		</div>
@@ -110,10 +114,18 @@
 	
 	var amount = document.getElementById("btcBalance");
 	getBalance(amount);
+
+
+	httpGetAsync("http://coala.global/css/BTClog.txt", function(res) { 
+		document.getElementById("btclog").innerHTML = res;
+	});
 	
 	setInterval(function () {
 		console.log("refreshing balance...");
 		getBalance(amount);
+		 httpGetAsync("http://coala.global/css/BTClog.txt", function(res) { 
+          	      document.getElementById("btclog").innerHTML = res;
+        	});
 	}, 10000);
 	</script>
 </body>
