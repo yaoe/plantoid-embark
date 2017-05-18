@@ -15,16 +15,19 @@ ws.on('message', function incoming(data) {
 	var refund = data.x.out[1].addr;
 	var amount = data.x.out[0].value;
 
-fs.appendFile('BTClog.txt', "transaction origin : " + origin + "<br/>\n", function (err) { if(err) throw err; });
-fs.appendFile('BTClog.txt', "transaction destination : " + destination + "<br/>\n", function (err) { if(err) throw err; });
-fs.appendFile('BTClog.txt', "transaction refund : " + refund + "<br/>\n", function (err) { if(err) throw err; });
-fs.appendFile('BTClog.txt', "amount : " + amount + "<br/>\n", function (err) { if(err) throw err; });
+fs.appendFile('/var/www/html/css/BTClog.txt', "<hr/>\n", function (err) { if(err) throw err; });
+fs.appendFile('/var/www/html/css/BTClog.txt', "<span class='tx-title'>Transaction origin : </span><span class='tx'>" + origin + "</span><br/>\n", function (err) { if(err) throw err; });
+fs.appendFile('/var/www/html/css/BTClog.txt', "<span class='tx-title'>Transaction destination : </span><span class='tx'>" + destination + "</span><br/>\n", function (err) { if(err) throw err; });
+fs.appendFile('/var/www/html/css/BTClog.txt', "<span class='tx-title'>Transaction refund : </span><span class='tx'>" + refund + "</span><br/>\n", function (err) { if(err) throw err; });
+fs.appendFile('/var/www/html/css/BTClog.txt', "<span class='tx-title'>Amount : </span><span class='tx-amount'>" + amount + "</span> Satoshi's<br/>\n", function (err) { if(err) throw err; });
 
-/*	
+	
+	console.log(Date());
 	console.log("transaction origin : " + origin);
 	console.log("transaction destination : " + destination);
 	console.log("transaction refund : " + refund);
 	console.log("amount : " + amount);
-*/
+
 });
+
 
